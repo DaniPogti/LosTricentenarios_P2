@@ -211,11 +211,14 @@ with mp_hands.Hands( #modelo de manos
                     
                 elif abs(index_finger_tip[1] - middle_finger_tip[1]) < 30 and \
                     index_finger_tip[1] > index_finger_pip[1] and \
-                    middle_finger_tip[1] > middle_finger_pip[1]:
+                    middle_finger_tip[1] > middle_finger_pip[1] and \
+                    ring_finger_tip[1] < ring_finger_pip[1] and \
+                    thumb_tip[1] > thumb_pip[1]:  # Pulgar doblado hacia la palma
                     print("nnnnnnnnnnnnnnnnnn")
                     cv2.putText(image, 'N', (700, 150), 
                                 cv2.FONT_HERSHEY_SIMPLEX, 
                                 3.0, (0, 0, 255), 6)
+
 
                 elif (index_finger_tip[1] > index_finger_pip[1]  # Índice apuntando hacia abajo
                     and middle_finger_tip[1] > middle_finger_pip[1]  # Medio apuntando hacia abajo
@@ -226,12 +229,7 @@ with mp_hands.Hands( #modelo de manos
                                 cv2.FONT_HERSHEY_SIMPLEX, 
                                 3.0, (0, 0, 255), 6)
                                         
-                elif abs(thumb_tip[0] - index_finger_tip[0]) < 30 and \
-                        abs(thumb_tip[1] - index_finger_tip[1]) < 30:
-                        print("oooooooooooooooooo")
-                        cv2.putText(image, 'O', (700, 150), 
-                                    cv2.FONT_HERSHEY_SIMPLEX, 
-                                    3.0, (0, 0, 255), 6)
+                
                         
                 elif abs(middle_finger_tip[0] - thumb_tip[0]) < 20 and \
                     abs(middle_finger_tip[1] - thumb_tip[1]) < 20 and \
@@ -242,6 +240,17 @@ with mp_hands.Hands( #modelo de manos
                     cv2.putText(image, 'P', (700, 150), 
                                 cv2.FONT_HERSHEY_SIMPLEX, 
                                 3.0, (0, 0, 255), 6) 
+                    
+                    
+                elif index_finger_tip[1] > index_finger_pip[1] and \
+                    middle_finger_tip[1] > middle_finger_pip[1] and \
+                    ring_finger_tip[1] > ring_finger_pip[1] and \
+                    pinky_tip[1] > pinky_pip[1] and \
+                    thumb_tip[1] > thumb_pip[1]:
+                    print("ssssssssssssssssss")
+                    cv2.putText(image, 'S', (700, 150), 
+                                cv2.FONT_HERSHEY_SIMPLEX, 
+                                3.0, (0, 0, 255), 6)
                                 
                 #print("pulgar", thumb_tip[1])
                 #print("dedo indice",index_finger_tip[1])
@@ -251,60 +260,3 @@ with mp_hands.Hands( #modelo de manos
       break
 cap.release()
 cv2.destroyAllWindows()
-
-
-
-'''import numpy as np
-import os
-import cv2
-import matplotlib.pyplot as plt
-
-# Tamaño de la imagen
-IMG_SIZE = 200
-
-# Categorías de las imágenes
-CATEGORIES = ["A", "B", "C", "D", "E", "F", "G", "I", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U"]
-
-# Ruta del dataset (ajusta esta ruta a tu sistema)
-DATASET_PATH = "c:/Users/Portillo/Desktop/USAC 2023/Samsumg/Proyecto 2/LosTricentenarios_P2/DataSet"
-
-# Función para cargar la primera imagen de cada categoría
-def CargarIMG(carpeta, img_size):
-    imagenes = []
-    for categoria in CATEGORIES:
-        path = os.path.join(carpeta, categoria)
-        class_num = CATEGORIES.index(categoria)
-        
-        # Obtener la lista de imágenes en la carpeta de la categoría
-        img_list = os.listdir(path)
-        
-        # Si hay al menos una imagen en la carpeta
-        if img_list:
-            img_name = img_list[0]  # Tomar la primera imagen
-            img_path = os.path.join(path, img_name)
-            img = cv2.imread(img_path)
-            if img is not None:
-                img = cv2.resize(img, (img_size, img_size))
-                imagenes.append((img, class_num))
-    return imagenes
-
-# Cargar las primeras imágenes de cada categoría
-imagenes = CargarIMG(DATASET_PATH, IMG_SIZE)
-
-# Mostrar las imágenes en una gráfica
-def graficoIMG(imagenes):
-    num_images = len(imagenes)  # Número de imágenes (una por categoría)
-    rows = int(np.ceil(np.sqrt(num_images)))  # Calcular el número de filas y columnas para la cuadrícula
-    cols = int(np.ceil(num_images / rows))
-    
-    plt.figure(figsize=(10, 10))
-    for i in range(num_images):
-        plt.subplot(rows, cols, i+1)
-        plt.imshow(cv2.cvtColor(imagenes[i][0], cv2.COLOR_BGR2RGB))
-        plt.title(CATEGORIES[imagenes[i][1]])
-        plt.axis('off')
-    plt.tight_layout()  # Ajustar el espaciado entre imágenes
-    plt.show()
-
-# Mostrar las imágenes
-graficoIMG(imagenes)'''
