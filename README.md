@@ -1,2 +1,2 @@
-# LosTricentenarios_P2
-Proyecto 2, Analizador de imágenes para el lenguaje de señas 
+# LosTricentenarios_P2 SEUN: Señas que Unen
+Proyecto 2, Analizador para el lenguaje de señas 
